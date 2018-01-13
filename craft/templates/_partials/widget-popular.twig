@@ -1,1 +1,14 @@
-<div class="hot-articles-block"><h1 class="sidebar-trending">MOST POPULAR</h1><div class="hot-article"><span class="hot-article-number">1</span><a class="hot-article-link" href="/a/drop-the-mic-danielle-fishel-jonathan-lipnicki?rel=hot-article">Topanga From 'Boy Meets World' And The 'Jerry Maguire' Kid Fa...</a></div><div class="hot-article"><span class="hot-article-number">2</span><a class="hot-article-link" href="/a/gal-gadot-patty-jenkins-charades-jimmy-fallon?rel=hot-article">Gal Gadot And Patty Jenkins Are Wonder Women In This Game Of ...</a></div><div class="hot-article"><span class="hot-article-number">3</span><a class="hot-article-link" href="/a/kids-try-100-years-of-expensive-foods-bon-appetit?rel=hot-article">Kids Try Some Of The World’s Most Expensive Foods And Their R...</a></div><div class="hot-article"><span class="hot-article-number">4</span><a class="hot-article-link" href="/a/female-action-heroes-quotes-movies-tv?rel=hot-article">11 Quotes From Female Action Heroes Kicking Butt In Film And TV</a></div><div class="hot-article"><span class="hot-article-number">5</span><a class="hot-article-link" href="/a/choreographers-dancers-dance-troupes?rel=hot-article">15 Choreographers, Dancers, And Dance Troupes Getting Us On O...</a></div></div>
+<div class="widget-popular-articles">
+
+  <h1 class="sidebar-trending">MOST POPULAR</h1>
+  
+  {% set popular_entries = craft.entries.section('news').limit(10) %}
+
+  {% for entry in popular_entries %}
+    <div class="hot-article">
+       <span class="hot-article-number">{{ loop.index }}</span>
+       <a class="hot-article-link" href="{{ entry.url }}">{{ entry.title }}</a>
+    </div>
+  {% endfor %}
+
+</div>
