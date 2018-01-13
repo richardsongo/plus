@@ -1,0 +1,47 @@
+<div class="widget-more-articles">
+
+  <h1 class="sidebar-heading">MOST ARTICLES</h1>
+  
+  {% set entries = craft.entries({
+      section: 'news',
+      limit: 10,
+      order: 'postDate desc',
+      with: ['featuredImages']
+  }) %}
+
+  {% for entry in entries %}
+  
+        {% set image = entry.featuredImages[0] ?? null %}
+        {% set transformedImages = craft.imager.transformImage(image,
+          [
+              { width: 1200, ratio: 2/1 },
+              { width: 1024, ratio: 2/1 },
+              { width: 768, ratio: 4/3, jpegQuality: 65 },
+          ],
+          {
+              format: 'jpg',
+              allowUpscale: false,
+              mode: 'crop',
+              jpegQuality: 80,
+              position: image.focusPctX ~ '% ' ~ image.focusPctY ~ '%',
+              interlace: true
+          }
+        ) %}
+
+        {% if image %}
+          <a class="photo" href="{{ entry.url }}">
+            <img class="scale-with-grid lazyload"
+                 src="{{ craft.imager.base64Pixel(2,1) }}"
+                 data-sizes="100vw"
+                 data-srcset="{{ craft.imager.srcset(transformedImages) }}"
+                 alt="{{ entry.title }}">
+          </a>
+        {% endif %}
+
+        <div class="popular-article">
+           <a class="popular-article--link" href="{{ entry.url }}">{{ entry.title }}</a>
+        </div>
+    
+  {% endfor %}
+
+</div>
