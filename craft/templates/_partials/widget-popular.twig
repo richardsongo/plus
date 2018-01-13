@@ -1,13 +1,13 @@
 <div class="widget-popular-articles">
 
-  <h1 class="sidebar-trending">MOST POPULAR</h1>
+  <h1 class="sidebar-heading">MOST POPULAR</h1>
   
   {% set popular_entries = craft.entries.section('news').limit(10) %}
 
   {% for entry in popular_entries %}
-    <div class="hot-article">
-       <span class="hot-article-number">{{ loop.index }}</span>
-       <a class="hot-article-link" href="{{ entry.url }}">{{ entry.title }}</a>
+    <div class="popular-article">
+       <span class="popular-article--number">{{ loop.index }}</span>
+       <a class="popular-article--link" href="{{ entry.url }}">{{ entry.title }}</a>
     </div>
   {% endfor %}
 
