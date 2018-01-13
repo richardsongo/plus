@@ -1,0 +1,28 @@
+<div class="widget-more-articles">
+
+  <h1 class="sidebar-heading">MOST ARTICLES</h1>
+  
+  {% set entries = craft.entries({
+      section: 'news',
+      limit: 10,
+      order: 'postDate desc',
+      with: ['featuredImages']
+  }) %}
+
+  {% for entry in entries %}
+  
+       {% set image = entry.featuredImages[0] ?? null %}
+
+        {% if image %}
+          <a class="photo" href="{{ entry.url }}">
+            <img src="{{ image.url }}" alt="{{ image.title }}" class="lazyload">
+          </a>
+        {% endif %}
+
+        <div class="popular-article">
+           <a class="popular-article--link" href="{{ entry.url }}">{{ entry.title }}</a>
+        </div>
+    
+  {% endfor %}
+
+</div>
