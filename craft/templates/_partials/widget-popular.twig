@@ -2,7 +2,7 @@
 
   <h1 class="sidebar-heading">MOST POPULAR</h1>
   
-  {% set popular_entries = craft.entries.section('news').limit(10) %}
+  {% set popular_entries = craft.entries.section('news').order('postDate desc').limit(10) %}
 
   {% for entry in popular_entries %}
     <div class="popular-article">
