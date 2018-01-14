@@ -39,7 +39,7 @@
 
         <h5 class="headline"><a class="popular-article--link" href="{{ entry.url }}">{{ entry.title }}</a></h5>
         <div class="preview-text">{{ entry.summary }}</div>
-        <div class="byline"><span class="author"><a href="/u/isaac"> Isaac Saul</a></span></div>
+        <div class="byline"><span class="author"><a href="{{ entry.url }}"> {{ entry.author }}</a></span></div>
         <div class="publish-date">{{ entry.postdate | date('m d, Y') }}</div>
         
 </article>
