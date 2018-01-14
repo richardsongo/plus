@@ -1,0 +1,49 @@
+  {% set entries = craft.entries({
+      section: 'news',
+      limit: 10,
+      order: 'postDate desc',
+      with: ['featuredImages']
+  }) %}
+
+  {% for entry in entries %}
+  
+        {% set image = entry.featuredImages[0] ?? null %}
+        {% set transformedImages = craft.imager.transformImage(image,
+          [
+              { width: 1200, ratio: 2/1 },
+              { width: 1024, ratio: 2/1 },
+              { width: 768, ratio: 4/3, jpegQuality: 65 },
+          ],
+          {
+              format: 'jpg',
+              allowUpscale: false,
+              mode: 'crop',
+              jpegQuality: 80,
+              position: image.focusPctX ~ '% ' ~ image.focusPctY ~ '%',
+              interlace: true
+          }
+        ) %}
+
+
+<article class="homepage-article-item col-sm-6 category-article-item">
+
+        {% if image %}
+          <a class="photo" href="{{ entry.url }}">
+            <img class="scale-with-grid lazyload"
+                 src="{{ craft.imager.base64Pixel(2,1) }}"
+                 data-sizes="100vw"
+                 data-srcset="{{ craft.imager.srcset(transformedImages) }}"
+                 alt="{{ entry.title }}">
+          </a>
+        {% endif %}  
+
+        <h5 class="headline"><a class="popular-article--link" href="{{ entry.url }}">{{ entry.title }}</a></h5>
+        <div class="preview-text">{{ entry.summary }}</div>
+        <div class="byline"><span class="author"><a href="/u/isaac"> Isaac Saul</a></span></div>
+        <div class="publish-date">{{ entry.postdate | date('m d, Y') }}</div>
+        
+</article>
+    
+    
+{% endfor %}
+
