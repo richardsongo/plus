@@ -1,1 +1,10 @@
+{% set category = craft.categories.slug('catSlug') %}
+{% set entries = craft.entries.relatedTo(category) %}
 
+
+
+{% for entry in entries %}
+
+    <a href="{{ entry.url }}">{{ entry.title }}</a>
+
+{% endfor %}
